@@ -1,0 +1,16 @@
+# AudioAnalysis Requirements
+# ==========================
+# Core tool requires only FFmpeg (external) - no pip packages needed!
+# Optional packages below enable additional features.
+
+# Optional: Advanced audio analysis (tempo detection)
+# librosa>=0.10.0
+
+# Optional: Speech transcription
+# SpeechRecognition>=3.10.0
+
+# Development dependencies
+# pytest>=8.0.0
+# pytest-cov>=5.0.0
+
+# Note: numpy is bundled with librosa if installed

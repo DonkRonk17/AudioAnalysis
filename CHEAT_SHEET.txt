@@ -1,0 +1,151 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      AUDIOANALYSIS - CHEAT SHEET                             ║
+║           Enable AI Agents to "Listen" and Analyze Audio Content             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ CORE CONCEPT: VOLTAGE GAUGE                                                   │
+│ Logan's insight: "Consider a voltage gauge for decibel and other detections" │
+│                                                                               │
+│ Audio amplitude treated like voltage readings from a meter                    │
+│ → Simple, direct measurement beats complex ML                                 │
+│ → dB scale matches human perception                                           │
+│ → Delta changes reveal key moments                                            │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+                              CLI COMMANDS
+═══════════════════════════════════════════════════════════════════════════════
+
+FULL ANALYSIS:
+  audioanalysis analyze music.mp3                    # Full analysis
+  audioanalysis analyze music.mp3 -o results.json   # Save to JSON
+  audioanalysis analyze music.mp3 --type quick      # Quick (voltage only)
+  audioanalysis analyze music.mp3 --speech          # Include transcription
+
+VOLTAGE READINGS:
+  audioanalysis voltage music.mp3                   # Get dB readings
+  audioanalysis voltage music.mp3 -s 20             # 20 samples/second
+
+KEY MOMENTS:
+  audioanalysis moments music.mp3                   # Find peaks/drops
+  audioanalysis moments music.mp3 --top 10          # Top 10 moments
+  audioanalysis moments music.mp3 -d 3.0            # Lower threshold
+
+ACTIVITY TIMELINE:
+  audioanalysis timeline music.mp3                  # Activity over time
+  audioanalysis timeline music.mp3 -b 15            # 15-second buckets
+
+DEPENDENCIES:
+  audioanalysis check-deps                          # Check requirements
+
+═══════════════════════════════════════════════════════════════════════════════
+                              PYTHON API
+═══════════════════════════════════════════════════════════════════════════════
+
+from audioanalysis import AudioAnalyzer, VoltageGauge, DeltaDetector
+
+# Full analysis
+analyzer = AudioAnalyzer()
+result = analyzer.analyze("music.mp3")
+print(f"Peak: {result.peak_db} dB, Mood: {result.mood.primary_mood}")
+
+# Voltage only
+gauge = VoltageGauge(samples_per_second=10)
+readings = gauge.read_voltages("music.mp3")
+stats = gauge.get_statistics(readings)
+
+# Key moments
+detector = DeltaDetector(threshold_db=6.0)
+moments = detector.get_all_key_moments(readings)
+
+═══════════════════════════════════════════════════════════════════════════════
+                              dB REFERENCE
+═══════════════════════════════════════════════════════════════════════════════
+
+Amplitude → dB (decibels)
+  1.0      →    0 dB    (maximum)
+  0.5      →   -6 dB    (perceived half loudness)
+  0.1      →  -20 dB
+  0.01     →  -40 dB
+  0.001    →  -60 dB
+  0.0      → -100 dB    (practical silence)
+
+Activity Levels:
+  > -10 dB    HIGH    (loud sections)
+  -10 to -20  MEDIUM  (normal)
+  -20 to -40  LOW     (quiet)
+  < -40 dB    SILENT  (near silence)
+
+═══════════════════════════════════════════════════════════════════════════════
+                            KEY MOMENT TYPES
+═══════════════════════════════════════════════════════════════════════════════
+
+  peak         Local maximum (loudest point)
+  drop         Sudden volume decrease (> threshold dB)
+  build_start  Beginning of crescendo
+  climax       Main peak of the audio
+
+═══════════════════════════════════════════════════════════════════════════════
+                         TEMPO DESCRIPTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+  < 60 BPM    Very slow (largo)
+  60-80       Slow (adagio)
+  80-100      Moderate (andante)
+  100-120     Walking pace (moderato)
+  120-140     Fast (allegro)
+  140-180     Very fast (vivace)
+  > 180       Extremely fast (presto)
+
+═══════════════════════════════════════════════════════════════════════════════
+                           MOOD TYPES
+═══════════════════════════════════════════════════════════════════════════════
+
+  Energetic   Fast tempo + high volume
+  Calm        Slow tempo + quiet
+  Dramatic    Wide dynamic range
+  Uplifting   Has builds and climax
+  Steady      Consistent dynamics
+
+═══════════════════════════════════════════════════════════════════════════════
+                         REQUIRED FILES
+═══════════════════════════════════════════════════════════════════════════════
+
+audioanalysis.py      Main module (1400+ lines)
+test_audioanalysis.py Test suite (59 tests)
+requirements.txt      Dependencies
+setup.py              Installation
+README.md             Full documentation (400+ lines)
+EXAMPLES.md           12 detailed examples
+CHEAT_SHEET.txt       This file
+
+═══════════════════════════════════════════════════════════════════════════════
+                          DEPENDENCIES
+═══════════════════════════════════════════════════════════════════════════════
+
+REQUIRED:
+  ✓ FFmpeg          Audio processing (winget install ffmpeg)
+  ✓ FFprobe         Metadata extraction (included with FFmpeg)
+
+OPTIONAL:
+  ○ librosa         Tempo detection (pip install librosa)
+  ○ speech_recognition  Transcription (pip install SpeechRecognition)
+  ○ numpy           Numerical (bundled with librosa)
+
+═══════════════════════════════════════════════════════════════════════════════
+                            CREDITS
+═══════════════════════════════════════════════════════════════════════════════
+
+Requested by:     Logan Smith (via WSL_CLIO)
+Voltage Gauge:    Logan Smith's insight
+Built by:         ATLAS (Team Brain)
+Protocol:         BUILD_PROTOCOL_V1.md + Bug Hunt Protocol
+
+═══════════════════════════════════════════════════════════════════════════════
+
+For the Maximum Benefit of Life.
+One World. One Family. One Love.
+Together for all time! ⚔️
+
+═══════════════════════════════════════════════════════════════════════════════
