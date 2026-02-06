@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/bfd14ab1-995b-4ce2-90be-8cc5c9f9d380" />
+
 # AudioAnalysis
 
 **Enable AI Agents to "Listen" and Analyze Audio Content**
@@ -592,6 +594,9 @@ ffmpeg -i input.xyz output.mp3
 | 1 hour | ~40 seconds | ~400 MB |
 
 ---
+
+<img width="1536" height="511" alt="image" src="https://github.com/user-attachments/assets/fb24dea5-1027-4fb9-9e7a-52d7e0488489" />
+
 
 ## Credits
 
